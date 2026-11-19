@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Para ti</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Parisienne&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!--
+=====================================================================
+  GUÍA DE SEÑALADORES  (busca con Ctrl+F el que quieras editar)
+=====================================================================
+  Cada texto, imagen y botón tiene un señalador con el formato:
+      <PANTALLA>-<Tipo><Número>
+  y aparece DOS veces: como un comentario pegado al elemento (el que
+  dice solo "1-Texto1") y como atributo  data-id="1-Texto1"  en el
+  elemento mismo.
+
+  PANTALLAS
+     1    Rueda de corazones (la "contraseña")
+     2    Título + imagen + botón continuar
+     3    Menú de 4 opciones
+     3.1  Burbujas de texto alrededor de la peonía
+     3.2  Galería de fotos colgada
+     3.3  Reproductor de vinilo (audio)
+     3.4  Carta escrita a mano
+
+  TIPOS
+     Titulo  = título de la pantalla         (ej. 3.2-Titulo)
+     Texto   = cualquier otro texto          (ej. 3.1-Texto4)
+     Imagen  = imágenes (src="img/...")      (ej. 3.2-Imagen6)
+     Boton   = texto de un botón             (ej. 2-Boton1)
+     Enlace  = enlace externo                (ej. 3.3-Enlace)
+
+  PARA IR DIRECTO A UNA PANTALLA mientras editas, agrega al final de la
+  dirección:  index.html#2   index.html#3   index.html#3.1  ...#3.4
+
+  Lo que se configura en JavaScript (canción, velocidad de la
+  carta, vueltas de la rueda...) está al principio de script.js.
+=====================================================================
+-->
+
+<!-- Fondo: dos ramos decorativos (solo se ven en pantallas grandes) -->
+<img class="decor decor-izq" data-id="Fondo-Imagen1" src="img/peonia.svg" alt="" aria-hidden="true"><!-- Fondo-Imagen1 -->
+<img class="decor decor-der" data-id="Fondo-Imagen2" src="img/peonia.svg" alt="" aria-hidden="true"><!-- Fondo-Imagen2 -->
+
+<main id="app">
+
+  <!-- ===================================================================
+       PANTALLA 1 · Rueda de corazones
+       =================================================================== -->
+  <section class="pantalla activa" data-pantalla="1" id="pantalla-1">
+    <article class="tarjeta">
+      <header class="cab">
+        <h1 class="titulo" data-id="1-Titulo"><!-- 1-Titulo -->Para poder entrar…</h1>
+        <p class="subtitulo" data-id="1-Texto1"><!-- 1-Texto1 -->adivina cuanto te quiero.</p>
+        <img class="divisor" src="img/decoracion/divisor.svg" alt="" aria-hidden="true">
+      </header>
+
+      <div class="centro">
+        <!-- Los corazones del medidor los crea script.js (CONFIG.corazones) -->
+        <div class="medidor" id="medidor" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Medidor de corazones"></div>
+
+        <div class="rueda-zona" id="rueda-zona">
+          <img class="rueda pista" id="rueda" data-id="1-Imagen1" src="img/decoracion/ruleta.png" alt="Rueda de flores: gírala" draggable="false" tabindex="0"><!-- 1-Imagen1 -->
+        </div>
+      </div>
+
+      <footer class="pie">
+        <p class="nota" id="nota-1" data-id="1-Texto2" data-completo="¡Listo, pasa!"><!-- 1-Texto2 (data-completo = lo que dice al llenarse) -->arrastra la rueda en círculos ♡</p>
+      </footer>
+    </article>
+  </section>
+
+
+  <!-- ===================================================================
+       PANTALLA 2 · Título, imagen y botón
+       =================================================================== -->
+  <section class="pantalla" data-pantalla="2" id="pantalla-2">
+    <article class="tarjeta">
+      <header class="cab">
+        <h1 class="titulo" data-id="2-Titulo"><!-- 2-Titulo -->Con mucho cariño</h1>
+        <p class="subtitulo" data-id="2-Texto1"><!-- 2-Texto1 -->para la mujer de mi vida</p>
+        <img class="divisor" src="img/decoracion/divisor.svg" alt="" aria-hidden="true">
+      </header>
+
+      <div class="centro">
+        <figure class="polaroid">
+          <img data-id="2-Imagen1" src="img/fawn.jpg" alt=""><!-- 2-Imagen1 -->
+        </figure>
+      </div>
+
+      <footer class="pie">
+        <button class="btn-sello" type="button" data-ir="3">
+          <img src="img/decoracion/sello.svg" alt="Fotito de lia" aria-hidden="true">
+          <span class="rotulo" data-id="2-Boton1"><!-- 2-Boton1 -->Continuar</span>
+        </button>
+      </footer>
+    </article>
+  </section>
+
+
+  <!-- ===================================================================
+       PANTALLA 3 · Menú de 4 opciones
+       =================================================================== -->
+  <section class="pantalla" data-pantalla="3" id="pantalla-3">
+    <article class="tarjeta">
+      <header class="cab">
+        <h1 class="titulo" data-id="3-Titulo"><!-- 3-Titulo -->¿A donde lleva?</h1>
+        <p class="subtitulo" data-id="3-Texto1"><!-- 3-Texto1 -->elige una</p>
+        <img class="divisor" src="img/decoracion/divisor.svg" alt="" aria-hidden="true">
+      </header>
+
+      <div class="centro">
+        <nav class="menu">
+          <!-- Opción A → pantalla 3.1 -->
+          <button class="opcion" type="button" data-ir="3.1">
+            <img data-id="3-Imagen1" src="img/peonia.svg" alt=""><!-- 3-Imagen1 -->
+            <span data-id="3-Boton1"><!-- 3-Boton1 -->♡</span>
+          </button>
+          <!-- Opción B → pantalla 3.2 -->
+          <button class="opcion" type="button" data-ir="3.2">
+            <img data-id="3-Imagen2" src="img/icono-galeria.svg" alt=""><!-- 3-Imagen2 -->
+            <span data-id="3-Boton2"><!-- 3-Boton2 -->♡♡</span>
+          </button>
+          <!-- Opción C → pantalla 3.3 -->
+          <button class="opcion" type="button" data-ir="3.3">
+            <img data-id="3-Imagen3" src="img/vinilo.png" alt=""><!-- 3-Imagen3 -->
+            <span data-id="3-Boton3"><!-- 3-Boton3 -->♡♡♡</span>
+          </button>
+          <!-- Opción D → pantalla 3.4 -->
+          <button class="opcion" type="button" data-ir="3.4">
+            <img data-id="3-Imagen4" src="img/sobre.svg" alt=""><!-- 3-Imagen4 -->
+            <span data-id="3-Boton4"><!-- 3-Boton4 -->♡♡♡♡</span>
+          </button>
+        </nav>
+      </div>
+
+      <footer class="pie">
+        <p class="nota" data-id="3-Texto2"><!-- 3-Texto2 -->con todo mi amor ♡</p>
+      </footer>
+    </article>
+  </section>
+
+
+  <!-- ===================================================================
+       PANTALLA 3.1 · Burbujas alrededor de la peonía
+       =================================================================== -->
+  <section class="pantalla" data-pantalla="3.1" id="pantalla-3-1">
+    <article class="tarjeta">
+      <header class="cab">
+        <h1 class="titulo" data-id="3.1-Titulo"><!-- 3.1-Titulo -->Cosas que amo de ti</h1>
+        <img class="divisor" src="img/decoracion/divisor.svg" alt="" aria-hidden="true">
+      </header>
+
+      <div class="centro">
+        <div class="orbita" id="orbita">
+          <img class="peonia-centro" data-id="3.1-Imagen1" src="img/circulo-peonia.png" alt="Peonía" ><!-- 3.1-Imagen1 -->
+
+          <div class="burbuja" data-id="3.1-Texto1"><!-- 3.1-Texto1 -->Tu inteligencia</div>
+          <div class="burbuja" data-id="3.1-Texto2"><!-- 3.1-Texto2 -->Tu amabilidad</div>
+          <div class="burbuja" data-id="3.1-Texto3"><!-- 3.1-Texto3 -->Tu preocupación</div>
+          <div class="burbuja" data-id="3.1-Texto4"><!-- 3.1-Texto4 -->Tu sonrisa</div>
+          <div class="burbuja" data-id="3.1-Texto5"><!-- 3.1-Texto5 -->Tu sensibilidad</div>
+          <div class="burbuja" data-id="3.1-Texto6"><!-- 3.1-Texto6 -->Tu valentía</div>
+          <div class="burbuja" data-id="3.1-Texto7"><!-- 3.1-Texto7 -->Tu paciencia</div>
+          <div class="burbuja" data-id="3.1-Texto8"><!-- 3.1-Texto8 -->Tu humor</div>
+          <div class="burbuja" data-id="3.1-Texto9"><!-- 3.1-Texto9 -->Tu coraje</div>
+          <div class="burbuja" data-id="3.1-Texto10"><!-- 3.1-Texto10 -->Todo, siempre</div>
+        </div>
+      </div>
+
+      <footer class="pie">
+        <button class="btn" type="button" data-ir="3"><span data-id="3.1-Boton1"><!-- 3.1-Boton1 -->← volver</span></button>
+      </footer>
+    </article>
+  </section>
+
+
+  <!-- ===================================================================
+       PANTALLA 3.2 · Galería colgada
+       
+       =================================================================== -->
+  <section class="pantalla" data-pantalla="3.2" id="pantalla-3-2">
+    <article class="tarjeta">
+      <header class="cab">
+        <h1 class="titulo" data-id="3.2-Titulo"><!-- 3.2-Titulo -->Mi galería favorita</h1>
+        <img class="divisor" src="img/decoracion/divisor.svg" alt="" aria-hidden="true">
+      </header>
+
+      <div class="centro centro-scroll">
+        <div class="galeria">
+          <figure class="cuadro"><img data-id="3.2-Imagen1" src="img/gale1.webp" alt="Foto 1"><!-- 3.2-Imagen1 --></figure>
+          <figure class="cuadro"><img data-id="3.2-Imagen2" src="img/gale2.png" alt="Foto 2"><!-- 3.2-Imagen2 --></figure>
+          <figure class="cuadro"><img data-id="3.2-Imagen3" src="img/gale3.webp" alt="Foto 3"><!-- 3.2-Imagen3 --></figure>
+          <figure class="cuadro"><img data-id="3.2-Imagen4" src="img/gale4.webp" alt="Foto 4"><!-- 3.2-Imagen4 --></figure>
+          <figure class="cuadro"><img data-id="3.2-Imagen5" src="img/gale5.webp" alt="Foto 5"><!-- 3.2-Imagen5 --></figure>
+          <figure class="cuadro"><img data-id="3.2-Imagen6" src="img/gale6.webp" alt="Foto 6"><!-- 3.2-Imagen6 --></figure>
+        </div>
+      </div>
+
+      <footer class="pie">
+        <button class="btn" type="button" data-ir="3"><span data-id="3.2-Boton1"><!-- 3.2-Boton1 -->← volver</span></button>
+      </footer>
+    </article>
+  </section>
+
+
+  <!-- ===================================================================
+       PANTALLA 3.3 · Reproductor de vinilo
+       La canción se configura en script.js  →  CONFIG.cancion (archivo en audio/)
+       =================================================================== -->
+  <section class="pantalla" data-pantalla="3.3" id="pantalla-3-3">
+    <article class="tarjeta">
+      <header class="cab">
+        <h1 class="titulo" data-id="3.3-Titulo"><!-- 3.3-Titulo -->Te quiero siempre</h1>
+        <img class="divisor" src="img/decoracion/divisor.svg" alt="" aria-hidden="true">
+      </header>
+
+      <div class="centro">
+        <div class="reproductor" id="reproductor">
+          <!-- 3.3-Imagen2: el disco que sale y gira (si usas un GIF girando, quita
+               la animación "girar" de .disco img en style.css) -->
+          <div class="disco"><img data-id="3.3-Imagen2" src="img/vinilo.png" alt=""></div><!-- 3.3-Imagen2 -->
+          <!-- 3.3-Imagen1: la portada. Al tocarla suena / se pausa -->
+          <button class="portada" id="portada" type="button" aria-label="Reproducir o pausar la canción">
+            <img data-id="3.3-Imagen1" src="img/portada-disco.png" alt=""><!-- 3.3-Imagen1 -->
+            
+          </button>
+        </div>
+
+        <p class="texto-cancion" data-id="3.3-Texto1"><!-- 3.3-Texto1 -->There's only me and you</p>
+      </div>
+
+      <footer class="pie">
+        <button class="btn" type="button" data-ir="3"><span data-id="3.3-Boton1"><!-- 3.3-Boton1 -->← volver</span></button>
+      </footer>
+    </article>
+  </section>
+
+
+  <!-- ===================================================================
+       PANTALLA 3.4 · Carta escrita a mano
+       La carta se escribe sola; toca la hoja para verla completa de golpe.
+       Cada <p> de 3.4-Texto1 es un párrafo (agrega o quita los que quieras).
+       =================================================================== -->
+  <section class="pantalla" data-pantalla="3.4" id="pantalla-3-4">
+    <article class="tarjeta">
+      <header class="cab">
+        <h1 class="titulo" data-id="3.4-Titulo"><!-- 3.4-Titulo -->Para la mujer de mis ojos</h1>
+        <img class="divisor" src="img/decoracion/divisor.svg" alt="" aria-hidden="true">
+      </header>
+
+      <div class="centro">
+        <div class="carta">
+          <div class="hoja" id="hoja">
+            <div class="hoja-interior" id="hoja-interior">
+              <div id="carta-texto" data-id="3.4-Texto1"><!-- 3.4-Texto1 (la carta) -->
+                <p>Alessandra, mi vida:</p>
+                <p>De niño mi color favorito siempre fue el azul, conforme crecía fui conociendo más y agregué el lavanda y el verde.</p>
+    
+                <p>Lo que no me esperaba es quedespues de conocerte tambien agregaría el amarillo y que el azul ahora lo veria más intenso, mi vida se lleno de colores desde que estas en mi viday me inspira a ser mejor persona.</p>
+      
+                <p>Espero con ansias el momento en el que nos cumplamos ese deseo de vernos y poder por fin tomar esas suaves manos, abrazarte y no más soltarte, pues como podría hacer para mirar a otro lado después de haberte visto.</p>
+               
+                <p>Te quiero siempre, Cuak</p>
+              </div>
+              <!-- 3.4-Imagen2: la mano que escribe (la punta del lápiz marca dónde va el texto) -->
+              <div class="mano" id="mano"><img data-id="3.4-Imagen2" src="img/mano-escribiendo.svg" alt="" aria-hidden="true"></div><!-- 3.4-Imagen2 -->
+            </div>
+          </div>
+
+          <figure class="foto-carta polaroid">
+            <img data-id="3.4-Imagen1" src="img/fawnflower.jpg" alt="Foto junto a la carta"><!-- 3.4-Imagen1 -->
+          </figure>
+        </div>
+      </div>
+
+      <footer class="pie">
+        <button class="btn" type="button" data-ir="3"><span data-id="3.4-Boton1"><!-- 3.4-Boton1 -->← volver</span></button>
+      </footer>
+    </article>
+  </section>
+
+</main>
+
+<div id="aviso" role="status" aria-live="polite"></div>
+
+<script src="script.js"></script>
+</body>
+</html>

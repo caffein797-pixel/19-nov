@@ -1,0 +1,140 @@
+/* ===== PALETA (edita aquí los colores) ===== */
+:root{
+  --crema:#f3e6cf; --papel:#fcf6e8; --oro:#c9923e; --rosa:#d98f8c; --rosa-claro:#f2cfc8;
+  --salvia:#8fa578; --durazno:#f0b98a; --tinta:#6b4a3a; --tinta-suave:#9a7a68;
+  --titulo:'Parisienne',cursive; --mano:'Caveat',cursive; --texto:'Lora',Georgia,serif;
+}
+*{box-sizing:border-box;margin:0}
+html,body{height:100%}
+body{font-family:var(--texto);color:var(--tinta);background:
+  radial-gradient(circle at 20% 15%,#f9efdc 0,transparent 45%),
+  radial-gradient(circle at 80% 85%,#ecd9c0 0,transparent 50%),var(--crema);overflow:hidden}
+img{max-width:100%;display:block}
+button{font:inherit;color:inherit;cursor:pointer;background:none;border:0}
+:focus-visible{outline:3px dashed var(--rosa);outline-offset:3px}
+
+.decor{position:fixed;width:min(22vw,320px);opacity:.9;pointer-events:none;display:none}
+.decor-izq{left:-3vw;bottom:2vh}.decor-der{right:-3vw;top:2vh;transform:scaleX(-1)}
+@media(min-width:1000px){.decor{display:block}}
+
+#app{height:100dvh;display:grid;place-items:center;padding:max(12px,env(safe-area-inset-top)) 12px max(12px,env(safe-area-inset-bottom))}
+.pantalla{display:none;position:relative;width:100%;justify-content:center;align-items:center}
+.pantalla.activa{display:flex;animation:entra .6s ease both;filter:drop-shadow(0 10px 14px rgba(107,74,58,.3))}
+@keyframes entra{from{opacity:0;transform:scale(.97) rotate(-.4deg)}}
+
+/* ===== TARJETA (papel con guirnalda y marco punteado dorado) ===== */
+/* ===== CARTA: papel envejecido, doblado en tres, recortado a mano ===== */
+.tarjeta{position:relative;z-index:1;width:min(calc(100% - 30px),520px);height:min(calc(100dvh - 70px),810px);display:grid;grid-template-rows:auto 1fr auto;
+  padding:40px 34px 30px;overflow:hidden;transform:rotate(-.6deg);
+  clip-path:polygon(.4% .6%,8% 0,17% .5%,29% .1%,41% .6%,53% 0,66% .5%,78% .1%,90% .6%,99.6% .2%,100% 8%,99.5% 19%,100% 31%,99.6% 44%,100% 57%,99.5% 70%,100% 83%,99.7% 99.4%,91% 100%,79% 99.5%,66% 100%,52% 99.4%,39% 100%,27% 99.5%,14% 100%,5% 99.5%,.3% 99.6%,0 90%,.5% 77%,0 63%,.4% 49%,0 36%,.5% 22%,0 10%);
+  box-shadow:inset 0 0 38px rgba(196,148,80,.3);
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 .55 0 0 0 0 .4 0 0 0 0 .25 0 0 0 .14 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E"),
+    radial-gradient(circle at 12% 7%,rgba(205,160,95,.24),transparent 28%),
+    radial-gradient(circle at 93% 95%,rgba(205,160,95,.28),transparent 32%),
+    radial-gradient(circle at 84% 80%,transparent 0 30px,rgba(180,130,70,.15) 32px 35px,transparent 38px),
+    linear-gradient(transparent calc(33.33% - 4px),rgba(150,110,60,.1) calc(33.33% - 1px),rgba(255,255,255,.6) 33.33%,transparent calc(33.33% + 4px)),
+    linear-gradient(transparent calc(66.66% - 4px),rgba(150,110,60,.1) calc(66.66% - 1px),rgba(255,255,255,.6) 66.66%,transparent calc(66.66% + 4px)),
+    var(--papel)}
+/* sobre de papel kraft detrás de la carta */
+.pantalla::before{content:"";position:absolute;left:50%;top:50%;width:min(100%,556px);height:min(calc(100dvh - 24px),862px);transform:translate(-50%,-50%) rotate(1.8deg);border-radius:4px;border:1px solid rgba(120,85,45,.35);
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 .55 0 0 0 0 .4 0 0 0 0 .25 0 0 0 .14 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E"),
+    linear-gradient(to top right,transparent calc(50% - .8px),rgba(120,85,45,.28) 50%,transparent calc(50% + .8px)) left bottom/50% 45% no-repeat,
+    linear-gradient(to top left,transparent calc(50% - .8px),rgba(120,85,45,.28) 50%,transparent calc(50% + .8px)) right bottom/50% 45% no-repeat,
+    linear-gradient(160deg,#dfc79f,#c8a678)}
+.tarjeta::before{content:"";position:absolute;inset:0;pointer-events:none;z-index:2;
+  background:url(img/decoracion/guirnalda-h.svg) top repeat-x,url(img/decoracion/guirnalda-h.svg) bottom repeat-x,
+  url(img/decoracion/guirnalda-v.svg) left repeat-y,url(img/decoracion/guirnalda-v.svg) right repeat-y;background-size:auto 24px,auto 24px,24px auto,24px auto}
+.tarjeta::after{content:"";position:absolute;inset:27px;border:1.5px dotted var(--oro);border-radius:4px;pointer-events:none}
+.cab{text-align:center;padding-top:6px}
+.titulo{font:400 clamp(2.1rem,8vw,2.9rem)/1.1 var(--titulo);color:var(--oro)}
+.subtitulo{margin-top:6px;font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;color:var(--tinta-suave)}
+.divisor{width:150px;margin:8px auto 0}
+.centro{min-height:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:10px 4px}
+.centro-scroll{justify-content:flex-start;overflow-y:auto}
+.pie{display:flex;justify-content:center;padding-top:8px;position:relative;z-index:3}
+.nota{font:600 1.35rem var(--mano);color:var(--rosa);text-align:center}
+
+.btn{font:700 1.3rem var(--mano);padding:6px 26px;color:var(--tinta);background:var(--rosa-claro);border:2px dashed var(--rosa);border-radius:4px;transform:rotate(-1.5deg);box-shadow:2px 3px 0 rgba(217,143,140,.35);transition:transform .2s}
+.btn:hover{transform:rotate(1deg) scale(1.05)}
+.btn-sello{position:relative;width:104px;height:104px;display:grid;place-items:center;transition:transform .2s}
+.btn-sello:hover{transform:rotate(-6deg) scale(1.06)}
+.btn-sello img{position:absolute;inset:0;width:100%;height:100%}
+.rotulo{position:relative;font:700 1.05rem var(--mano);color:#fff7e8;text-shadow:0 1px 1px rgba(90,50,30,.5);text-align:center;line-height:1}
+
+/* ===== PANTALLA 1 ===== */
+.medidor{display:flex;gap:4px}
+.corazon{position:relative;width:34px;height:32px;--p:0%;transition:transform .25s}
+.corazon i{position:absolute;inset:0}
+.corazon svg{width:100%;height:100%;filter:url(#crayon)}
+.corazon .base path{fill:none;stroke:var(--rosa);stroke-width:2.4;stroke-linejoin:round}
+.corazon .relleno{clip-path:inset(0 calc(100% - var(--p)) 0 0)}
+.corazon .relleno path{fill:var(--rosa);stroke:#c4706f;stroke-width:2.4}
+.rueda-zona{display:grid;place-items:center}
+.rueda{width:min(62vw,270px);touch-action:none;cursor:grab;user-select:none;filter:drop-shadow(0 6px 8px rgba(107,74,58,.25))}
+.rueda:active{cursor:grabbing}
+
+/* ===== PANTALLA 2 ===== */
+.polaroid{background:#fff;padding:12px 12px 36px;box-shadow:0 6px 14px rgba(107,74,58,.25);transform:rotate(-2.5deg);width:min(72%,290px);position:relative}
+.polaroid::before{content:"";position:absolute;top:-12px;left:50%;width:84px;height:24px;margin-left:-42px;background:rgba(242,207,200,.8);transform:rotate(3deg);box-shadow:0 1px 2px rgba(0,0,0,.12)}
+.polaroid img{width:100%;aspect-ratio:1;object-fit:cover}
+
+/* ===== PANTALLA 3 · menú ===== */
+.menu{display:grid;grid-template-columns:1fr 1fr;gap:18px;width:100%}
+.opcion{display:flex;flex-direction:column;align-items:center;gap:8px;padding:16px 8px;background:#fff;border:2px solid var(--rosa-claro);border-radius:4px;box-shadow:3px 4px 0 rgba(201,146,62,.3);transition:transform .2s}
+.opcion:nth-child(odd){transform:rotate(-1.5deg)}.opcion:nth-child(even){transform:rotate(1.5deg)}
+.opcion:hover{transform:rotate(0) scale(1.05)}
+.opcion img{width:62px;height:62px;object-fit:contain}
+.opcion span{font:700 1.2rem/1.1 var(--mano)}
+
+/* ===== 3.1 burbujas ===== */
+.orbita{position:relative;width:min(100%,400px);aspect-ratio:1}
+.peonia-centro{position:absolute;left:50%;top:50%;width:38%;transform:translate(-50%,-50%);filter:drop-shadow(0 4px 6px rgba(107,74,58,.25))}
+.burbuja{position:absolute;left:50%;top:50%;opacity:0;white-space:nowrap;padding:6px 14px;font:600 1.1rem var(--mano);background:var(--rosa-claro);border:1.5px solid var(--rosa);border-radius:999px;box-shadow:1px 2px 0 rgba(217,143,140,.4);will-change:transform}
+.burbuja:nth-of-type(3n+2){background:#f8e3b8;border-color:var(--oro)}
+.burbuja:nth-of-type(3n){background:#dfe8cf;border-color:var(--salvia)}
+
+/* ===== 3.2 galería ===== */
+.galeria{display:grid;grid-template-columns:1fr 1fr;gap:30px 24px;width:100%;padding:24px 8px 12px}
+.cuadro{position:relative;background:#fff;padding:7px;border:8px solid var(--oro);box-shadow:inset 0 0 0 2px #e8c98f,3px 5px 9px rgba(107,74,58,.3)}
+.cuadro:nth-child(odd){transform:rotate(-1.2deg)}.cuadro:nth-child(even){transform:rotate(1.2deg)}
+.cuadro img{width:100%;aspect-ratio:4/5;object-fit:cover}
+.cuadro::before{content:"";position:absolute;left:25%;width:50%;top:-24px;height:16px;
+  background:linear-gradient(to top right,transparent calc(50% - .7px),#8a6a50 50%,transparent calc(50% + .7px)) left/50% 100% no-repeat,
+  linear-gradient(to top left,transparent calc(50% - .7px),#8a6a50 50%,transparent calc(50% + .7px)) right/50% 100% no-repeat}
+.cuadro::after{content:"";position:absolute;inset:-14px;pointer-events:none;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 30'%3E%3Cpath d='M16 28C4 18 1 11 5 6c4-4 9-2 11 2 2-4 7-6 11-2 4 5 1 12-11 22z' fill='%23d98f8c' stroke='%23b86463' stroke-width='2'/%3E%3C/svg%3E") left top/24px no-repeat,
+  url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 30'%3E%3Cpath d='M16 28C4 18 1 11 5 6c4-4 9-2 11 2 2-4 7-6 11-2 4 5 1 12-11 22z' fill='%23d98f8c' stroke='%23b86463' stroke-width='2'/%3E%3C/svg%3E") right bottom/24px no-repeat}
+
+/* ===== 3.3 vinilo ===== */
+.reproductor{position:relative;width:min(100%,310px);height:240px}
+.disco{position:absolute;top:30px;left:16px;width:174px;height:174px;transition:transform .9s cubic-bezier(.3,.8,.3,1)}
+.disco img{width:100%;height:100%;animation:girar 3s linear infinite;animation-play-state:paused}
+.reproductor.sonando .disco{transform:translateX(157px)}
+.reproductor.sonando .disco img{animation-play-state:running}
+@keyframes girar{to{transform:rotate(360deg)}}
+.portada{position:absolute;top:0;left:0;width:240px;height:240px;z-index:1;box-shadow:4px 6px 12px rgba(107,74,58,.35)}
+.portada img{width:100%;height:100%}
+.icono{position:absolute;right:10px;bottom:10px;width:40px;height:40px;border-radius:50%;background:rgba(252,246,232,.92);border:2px solid var(--rosa)}
+.icono::before{content:"";position:absolute;left:15px;top:10px;border-left:14px solid var(--rosa);border-top:9px solid transparent;border-bottom:9px solid transparent}
+.sonando .icono::before{left:12px;top:11px;width:16px;height:16px;border:0;border-left:5px solid var(--rosa);border-right:5px solid var(--rosa)}
+.texto-cancion{font:500 1.3rem/1.3 var(--mano);text-align:center;max-width:380px}
+
+/* ===== 3.4 carta ===== */
+.carta{display:grid;grid-template-columns:1fr 104px;gap:14px;width:100%;height:100%;align-items:start}
+.hoja{height:100%;overflow-y:auto;background:var(--papel) repeating-linear-gradient(transparent 0 25px,#ecd9b8 25px 26px);border:1px solid #e6d3b3;box-shadow:2px 4px 8px rgba(107,74,58,.2);cursor:pointer}
+.hoja-interior{position:relative;padding:4px 14px 40px;font:500 1.3rem/26px var(--mano)}
+.hoja-interior p{margin-bottom:26px}
+.mano{position:absolute;width:70px;pointer-events:none;transform:translateY(-100%);transition:opacity .5s}
+.mano.oculta{opacity:0}
+.foto-carta{width:104px;padding:6px 6px 20px;margin-top:10px;transform:rotate(3deg)}
+.foto-carta::before{width:50px;margin-left:-25px;height:16px;top:-8px}
+@media(max-width:420px){.carta{grid-template-columns:1fr 84px}.foto-carta{width:84px}.tarjeta{padding:38px 26px 26px}}
+
+#aviso{position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);opacity:0;pointer-events:none;padding:8px 18px;background:var(--tinta);color:var(--papel);border-radius:4px;font:1.1rem var(--mano);transition:.4s;max-width:90vw;text-align:center;z-index:10}
+#aviso.ver{opacity:1;transform:translate(-50%,0)}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* confeti (serpentinas y flores) */
+.confeti{position:fixed;top:-30px;z-index:20;pointer-events:none;width:8px;height:22px;border-radius:2px;animation:cae linear forwards}
+img.confeti{width:26px;height:26px}
+@keyframes cae{to{transform:translate(var(--dx),110vh) rotate(var(--giro))}}
